@@ -1,3 +1,5 @@
+import { CommandInteraction, SlashCommandBuilder } from "discord.js"
+
 declare global {
     namespace NODEJS {
         interface ProcessEnv {
@@ -12,4 +14,9 @@ export interface BotEvent {
     execute: (...args) => void
 }
 
+export interface slashCommand {
+    name: string,
+    data: SlashCommandBuilder,
+    async execute: (interaction: CommandInteraction) => Promise<void>
+}
 export {}
