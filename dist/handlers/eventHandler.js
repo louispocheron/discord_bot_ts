@@ -5,7 +5,7 @@ const path_1 = require("path");
 module.exports = (client) => {
     const eventDir = (0, path_1.join)(__dirname, '../events');
     (0, fs_1.readdirSync)(eventDir).forEach(file => {
-        if (file.endsWith('.js'))
+        if (!file.endsWith('.js'))
             return;
         const event = require(`${eventDir}/${file}`).default;
         event.once ? client.once(event.name, (...args) => event.execute(...args)) : client.on(event.name, (...args) => event.execute(...args));

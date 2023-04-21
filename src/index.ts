@@ -4,7 +4,6 @@ import { readdirSync } from 'fs';
 import { join } from 'path';
 
 dotenv.config();
-console.log(process.env.TOKEN);
 const client = new Client({
     intents: [
         GatewayIntentBits.GuildMembers,

@@ -28,7 +28,6 @@ const dotenv = __importStar(require("dotenv"));
 const fs_1 = require("fs");
 const path_1 = require("path");
 dotenv.config();
-console.log(process.env.TOKEN);
 const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.GuildMembers,
