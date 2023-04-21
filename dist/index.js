@@ -36,6 +36,7 @@ const client = new discord_js_1.Client({
         discord_js_1.GatewayIntentBits.GuildMessageTyping,
     ]
 });
+client.slashCommands = new discord_js_1.Collection();
 const handleDirs = (0, path_1.join)(__dirname, './handlers');
 (0, fs_1.readdirSync)(handleDirs).forEach(file => {
     require(`${handleDirs}/${file}`)(client);

@@ -8,15 +8,22 @@ declare global {
         }
     }
 }
+
+declare module 'discord.js' {
+    export interface Client {
+        slashCommands: Collecttion<string, SlashCommand>
+    }
+}
 export interface BotEvent {
     name: string,
     once?: Boolean | false
     execute: (...args) => void
 }
 
-export interface slashCommand {
+export interface SlashCommand {
     name: string,
     data: SlashCommandBuilder,
     async execute: (interaction: CommandInteraction) => Promise<void>
 }
-export {}
+
+export { }
