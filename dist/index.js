@@ -28,6 +28,8 @@ const dotenv = __importStar(require("dotenv"));
 const fs_1 = require("fs");
 const path_1 = require("path");
 dotenv.config();
+const token = process.env.TOKEN;
+const clientId = process.env.CLIENT_ID;
 const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.GuildMembers,
@@ -36,9 +38,13 @@ const client = new discord_js_1.Client({
         discord_js_1.GatewayIntentBits.GuildMessageTyping,
     ]
 });
+client.on('ready', () => {
+    const guild = client.guilds.cache.first();
+    process.env['GUILD_ID'] = guild === null || guild === void 0 ? void 0 : guild.id;
+});
 client.slashCommands = new discord_js_1.Collection();
 const handleDirs = (0, path_1.join)(__dirname, './handlers');
 (0, fs_1.readdirSync)(handleDirs).forEach(file => {
     require(`${handleDirs}/${file}`)(client);
 });
-client.login(process.env.TOKEN);
+client.login(token);

@@ -4,10 +4,14 @@ import { BotEvent } from "../types";
 const event: BotEvent = {
     name: Events.InteractionCreate,
     once: false,
-    execute(interaction: Interaction) {
+    async execute(interaction: Interaction) {
         if (!interaction.isChatInputCommand) return
 
-        const command = interaction.client;
+        if(!interaction.isChatInputCommand()) return;
+
+        const command = interaction.client.slashCommands.get(interaction.commandName);
+
+        await command.execute(interaction);
     }
 
 }

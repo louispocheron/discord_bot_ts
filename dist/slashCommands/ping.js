@@ -9,19 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.command = void 0;
 const discord_js_1 = require("discord.js");
-const event = {
-    name: discord_js_1.Events.InteractionCreate,
-    once: false,
-    execute(interaction) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!interaction.isChatInputCommand)
-                return;
-            if (!interaction.isChatInputCommand())
-                return;
-            const command = interaction.client.slashCommands.get(interaction.commandName);
-            yield command.execute(interaction);
+const builders_1 = require("@discordjs/builders");
+exports.command = {
+    name: 'ping',
+    data: new discord_js_1.SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('affiche le ping du bot'),
+    execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
+        yield interaction.reply({
+            embeds: [
+                new builders_1.EmbedBuilder()
+                    .setAuthor({
+                    name: 'popoch'
+                })
+                    .setDescription(`Pong\nPing: ${interaction.client.ws.ping}`)
+            ]
         });
-    }
+    })
 };
-exports.default = event;
